@@ -80,6 +80,11 @@ class LoginViewController: UIViewController {
                                                         style: .done,
                                                         target: self,
                                                         action: #selector(didTapRegister))
+    loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+
+    emailField.delegate = self
+    passwordField.delegate = self
+
     //Adding subviews
     view.addSubview(scrollView)
     scrollView.addSubview(imageView)
@@ -112,9 +117,43 @@ class LoginViewController: UIViewController {
   }
 
   //MARK: - Actions
+  @objc private func loginButtonTapped() {
+
+    emailField.resignFirstResponder()
+    passwordField.resignFirstResponder()
+    
+    guard let email = emailField.text,
+          let password = passwordField.text,
+          !email.isEmpty,
+          !password.isEmpty,
+          password.count >= 6 else {
+            alertUserLoginError()
+            return
+          }
+    //Firebase Login
+  }
+
+  func alertUserLoginError() {
+    let alert = UIAlertController(title: "Woops!", message: "Please enter all information to log in.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+    present(alert, animated: true)
+  }
+
   @objc private func didTapRegister() {
     let vc = RegisterViewController()
     vc.title = "Create Account"
     navigationController?.pushViewController(vc, animated: true)
+  }
+}
+
+//MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == emailField {
+      passwordField.becomeFirstResponder()
+    } else if textField == passwordField {
+      loginButtonTapped()
+    }
+    return true
   }
 }
