@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
   
@@ -144,33 +145,33 @@ class RegisterViewController: UIViewController {
   //MARK: - Layout
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    scrollView.frame        = view.bounds
-    let size                = scrollView.width/3
-    imageView.frame         = CGRect(x: (scrollView.width - size)/2,
-                                     y: 20,
-                                     width: size,
-                                     height: size)
+    scrollView.frame             = view.bounds
+    let size                     = scrollView.width/3
+    imageView.frame              = CGRect(x: (scrollView.width - size)/2,
+                                          y: 20,
+                                          width: size,
+                                          height: size)
     imageView.layer.cornerRadius = imageView.width/2.0
-    firstNameField.frame    = CGRect(x: 30,
-                                     y: imageView.bottom+10,
-                                     width: scrollView.width-60,
-                                     height: 52)
-    lastNameField.frame     = CGRect(x: 30,
-                                     y: firstNameField.bottom+10,
-                                     width: scrollView.width-60,
-                                     height: 52)
-    emailField.frame        = CGRect(x: 30,
-                                     y: lastNameField.bottom+10,
-                                     width: scrollView.width-60,
-                                     height: 52)
-    passwordField.frame     = CGRect(x: 30,
-                                     y: emailField.bottom+10,
-                                     width: scrollView.width-60,
-                                     height: 52)
-    registerButton.frame       = CGRect(x: 30,
-                                        y: passwordField.bottom+10,
-                                        width: scrollView.width-60,
-                                        height: 52)
+    firstNameField.frame         = CGRect(x: 30,
+                                          y: imageView.bottom+10,
+                                          width: scrollView.width-60,
+                                          height: 52)
+    lastNameField.frame          = CGRect(x: 30,
+                                          y: firstNameField.bottom+10,
+                                          width: scrollView.width-60,
+                                          height: 52)
+    emailField.frame             = CGRect(x: 30,
+                                          y: lastNameField.bottom+10,
+                                          width: scrollView.width-60,
+                                          height: 52)
+    passwordField.frame          = CGRect(x: 30,
+                                          y: emailField.bottom+10,
+                                          width: scrollView.width-60,
+                                          height: 52)
+    registerButton.frame         = CGRect(x: 30,
+                                          y: passwordField.bottom+10,
+                                          width: scrollView.width-60,
+                                          height: 52)
   }
 
   //MARK: - Actions
@@ -195,7 +196,12 @@ class RegisterViewController: UIViewController {
             alertUserLoginError()
             return
           }
-    //Firebase Register
+    //Firebase Account Creation
+    FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+      guard let result = authResult, error == nil else { return }
+      let user = result.user
+      print("Created User: \(user)")
+    }
   }
 
   func alertUserLoginError() {

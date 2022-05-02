@@ -20,6 +20,7 @@
 		367A0743281B24FD00A092FE /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0742281B24FD00A092FE /* NewConversationViewController.swift */; };
 		367A0745281B251200A092FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0744281B251200A092FE /* ProfileViewController.swift */; };
 		367A0748281CA87300A092FE /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0747281CA87300A092FE /* UIView + Extension.swift */; };
+		367A074C2820605000A092FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367A074B2820605000A092FE /* GoogleService-Info.plist */; };
 		5E40511F9E08E9BC7DBFD8A0 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0687A6389CC69C6B684BC4FD /* Pods_Messenger.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		367A0742281B24FD00A092FE /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		367A0744281B251200A092FE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		367A0747281CA87300A092FE /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
+		367A074B2820605000A092FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B89DBA03EB4B1715B0ACABB5 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		C69574D7CECBB6120BE6AF35 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 		367A071F281B156C00A092FE /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				367A074B2820605000A092FE /* GoogleService-Info.plist */,
 				367A0738281B1C3400A092FE /* Supported Files */,
 				367A0737281B1C2800A092FE /* View Models */,
 				367A0736281B1C1500A092FE /* Views */,
@@ -165,7 +168,6 @@
 				C69574D7CECBB6120BE6AF35 /* Pods-Messenger.debug.xcconfig */,
 				B89DBA03EB4B1715B0ACABB5 /* Pods-Messenger.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -230,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				367A072D281B157300A092FE /* LaunchScreen.storyboard in Resources */,
+				367A074C2820605000A092FE /* GoogleService-Info.plist in Resources */,
 				367A072A281B157300A092FE /* Assets.xcassets in Resources */,
 				367A0728281B156C00A092FE /* Main.storyboard in Resources */,
 			);
