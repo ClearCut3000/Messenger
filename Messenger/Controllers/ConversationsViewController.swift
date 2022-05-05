@@ -14,7 +14,6 @@ class ConversationsViewController: UIViewController {
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .red
   }
 
   override func viewDidAppear(_ animated: Bool) {
