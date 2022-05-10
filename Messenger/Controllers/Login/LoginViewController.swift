@@ -8,8 +8,12 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
+
+  //MARK: - Properties
+  private var loginObserver: NSObjectProtocol?
 
   //MARK: - Subview's
   private let scrollView: UIScrollView = {
@@ -75,13 +79,23 @@ class LoginViewController: UIViewController {
 
   private let fbLoginButton: FBLoginButton = {
     let button = FBLoginButton()
-    button.permissions = ["email, public_profile"]
+    button.permissions = ["email", "public_profile"]
     return button
   }()
+
+  private let googleLoginButton = GIDSignInButton()
 
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
+                                                           object: nil,
+                                                           queue: .main) { [weak self] _ in
+      guard let strongSelf = self else { return }
+      strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    GIDSignIn.sharedInstance().presentingViewController = self
+
     title = "Log In"
     view.backgroundColor = .cyan
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
@@ -102,6 +116,13 @@ class LoginViewController: UIViewController {
     scrollView.addSubview(passwordField)
     scrollView.addSubview(loginButton)
     scrollView.addSubview(fbLoginButton)
+    scrollView.addSubview(googleLoginButton)
+  }
+
+  deinit {
+    if let observer = loginObserver {
+      NotificationCenter.default.removeObserver(observer)
+    }
   }
 
   //MARK: - Layout
@@ -129,7 +150,10 @@ class LoginViewController: UIViewController {
                                           y: loginButton.bottom+10,
                                           width: scrollView.width-60,
                                           height: 52)
-    fbLoginButton.frame.origin.y = loginButton.bottom + 20
+    googleLoginButton.frame      = CGRect(x: 30,
+                                          y: fbLoginButton.bottom+10,
+                                          width: scrollView.width-60,
+                                          height: 52)
   }
 
   //MARK: - Actions

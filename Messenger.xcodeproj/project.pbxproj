@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3621166B282B0DD3001BA8C8 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621166A282B0DD2001BA8C8 /* Notification+Extension.swift */; };
 		367A0721281B156C00A092FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0720281B156C00A092FE /* AppDelegate.swift */; };
 		367A0723281B156C00A092FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0722281B156C00A092FE /* SceneDelegate.swift */; };
 		367A0725281B156C00A092FE /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0724281B156C00A092FE /* ConversationsViewController.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		0687A6389CC69C6B684BC4FD /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3621166A282B0DD2001BA8C8 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		367A071D281B156C00A092FE /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367A0720281B156C00A092FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		367A0722281B156C00A092FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				367A0722281B156C00A092FE /* SceneDelegate.swift */,
 				367A0747281CA87300A092FE /* UIView + Extension.swift */,
 				367A074D282309B800A092FE /* DatabaseManager.swift */,
+				3621166A282B0DD2001BA8C8 /* Notification+Extension.swift */,
 			);
 			path = "Supported Files";
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				367A071A281B156C00A092FE /* Frameworks */,
 				367A071B281B156C00A092FE /* Resources */,
 				3BBA6FEE3B60A59DAE638F83 /* [CP] Embed Pods Frameworks */,
+				9E1A7F7E4EF3611456457A0F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -285,6 +289,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9E1A7F7E4EF3611456457A0F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Messenger/Pods-Messenger-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Messenger/Pods-Messenger-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Messenger/Pods-Messenger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -294,6 +315,7 @@
 			files = (
 				367A073B281B247300A092FE /* LoginViewController.swift in Sources */,
 				367A074E282309B800A092FE /* DatabaseManager.swift in Sources */,
+				3621166B282B0DD3001BA8C8 /* Notification+Extension.swift in Sources */,
 				367A073D281B248600A092FE /* RegisterViewController.swift in Sources */,
 				367A0743281B24FD00A092FE /* NewConversationViewController.swift in Sources */,
 				367A0725281B156C00A092FE /* ConversationsViewController.swift in Sources */,
