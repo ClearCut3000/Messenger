@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3621166B282B0DD3001BA8C8 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621166A282B0DD2001BA8C8 /* Notification+Extension.swift */; };
+		3621166D282B1902001BA8C8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621166C282B1902001BA8C8 /* ChatViewController.swift */; };
 		367A0721281B156C00A092FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0720281B156C00A092FE /* AppDelegate.swift */; };
 		367A0723281B156C00A092FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0722281B156C00A092FE /* SceneDelegate.swift */; };
 		367A0725281B156C00A092FE /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0724281B156C00A092FE /* ConversationsViewController.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		0687A6389CC69C6B684BC4FD /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3621166A282B0DD2001BA8C8 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
+		3621166C282B1902001BA8C8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		367A071D281B156C00A092FE /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367A0720281B156C00A092FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		367A0722281B156C00A092FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				367A073E281B24B900A092FE /* PhotoViewerViewController.swift */,
 				367A0744281B251200A092FE /* ProfileViewController.swift */,
 				367A0740281B24D200A092FE /* VideoPlayerViewController.swift */,
+				3621166C282B1902001BA8C8 /* ChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				367A0741281B24D200A092FE /* VideoPlayerViewController.swift in Sources */,
 				367A0748281CA87300A092FE /* UIView + Extension.swift in Sources */,
 				367A0721281B156C00A092FE /* AppDelegate.swift in Sources */,
+				3621166D282B1902001BA8C8 /* ChatViewController.swift in Sources */,
 				367A0745281B251200A092FE /* ProfileViewController.swift in Sources */,
 				367A0723281B156C00A092FE /* SceneDelegate.swift in Sources */,
 				367A073F281B24B900A092FE /* PhotoViewerViewController.swift in Sources */,
