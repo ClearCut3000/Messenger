@@ -34,6 +34,9 @@ class ConversationsViewController: UIViewController {
   //MARK: - View Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
+                                                        target: self,
+                                                        action: #selector(didTapComposeButton))
     view.addSubview(tableView)
     view.addSubview(noConversationsLabel)
     setupTableView()
@@ -43,6 +46,12 @@ class ConversationsViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     validateAuth()
+  }
+
+  //MARK: - Layout
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    tableView.frame = view.bounds
   }
 
   //MARK: - Methods
@@ -61,7 +70,14 @@ class ConversationsViewController: UIViewController {
   }
 
   private func fetchConversations() {
+    tableView.isHidden = false
+  }
 
+  //MARK: - Actions
+  @objc private func didTapComposeButton() {
+    let vc = NewConversationViewController()
+    let navVC = UINavigationController(rootViewController: vc)
+    present(navVC, animated: true)
   }
 }
 
@@ -73,6 +89,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    cell.accessoryType = .disclosureIndicator
     return cell
   }
 
