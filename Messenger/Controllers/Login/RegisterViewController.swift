@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import JGProgressHUD
+import FirebaseStorage
 
 class RegisterViewController: UIViewController {
   
@@ -220,7 +221,16 @@ class RegisterViewController: UIViewController {
             guard let image = strongSelf.imageView.image, let data = image.pngData() else {
               return
             }
-            let fileName = 
+            let filename = chatUser.profilePictureFileName
+            StorageManager.shared.uploadProfilePicture(with: data, fileName: filename) { result in
+              switch result {
+              case .success(let downloadURL):
+                UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
+                print(downloadURL)
+              case .failure(let error):
+                print("Storage manager error - \(error)")
+              }
+            }
           }
         }
         strongSelf.navigationController?.dismiss(animated: true, completion: nil)
