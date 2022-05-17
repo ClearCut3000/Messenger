@@ -15,7 +15,9 @@ final class DatabaseManager {
   private let database = Database.database().reference()
 
   //MARK: - Methods
-
+  static func safeEmail(emailAddress: String) -> String {
+    return emailAddress.replacingOccurrences(of: "@", with: "-").replacingOccurrences(of: ".", with: "-")
+  }
 }
 
 //MARK: - Account Management
