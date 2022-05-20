@@ -11,6 +11,9 @@ import JGProgressHUD
 
 class ConversationsViewController: UIViewController {
 
+  //MARK: - Properties
+
+
   //MARK: - Subview's
   private let spinner = JGProgressHUD(style: .dark)
 
@@ -73,9 +76,21 @@ class ConversationsViewController: UIViewController {
     tableView.isHidden = false
   }
 
+  private func createNewConversation(result: [String: String]) {
+    guard let name = result["name"], let email = result["email"] else { return }
+    let vc = ChatViewController(with: email)
+    vc.isNewConversation = true
+    vc.title = name
+    vc.navigationItem.largeTitleDisplayMode = .never
+    navigationController?.pushViewController(vc, animated: true)
+  }
+
   //MARK: - Actions
   @objc private func didTapComposeButton() {
     let vc = NewConversationViewController()
+    vc.completion = { [weak self] result in
+      self?.createNewConversation(result: result)
+    }
     let navVC = UINavigationController(rootViewController: vc)
     present(navVC, animated: true)
   }
@@ -95,7 +110,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    let vc = ChatViewController()
+    let vc = ChatViewController(with: "")
     vc.title = "Some Chat"
     vc.navigationItem.largeTitleDisplayMode = .never
     navigationController?.pushViewController(vc, animated: true)
