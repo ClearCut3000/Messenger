@@ -89,7 +89,7 @@ extension DatabaseManager {
 extension DatabaseManager {
 
   /// Creates a new conversation with target user email and first message
-  public func createConversation(with otherUserEmail: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+  public func createNewConversation(with otherUserEmail: String, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
     guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String else { return }
     let safeEmail = DatabaseManager.safeEmail(emailAddress: currentEmail)
     let ref = database.child("\(safeEmail)")
@@ -132,6 +132,7 @@ extension DatabaseManager {
       let newConversationData: [String: Any] = [
         "id": conversationID,
         "other_user_email": otherUserEmail,
+        "name": name,
         "latest_message": [
           "date": dateString,
           "message": message,
@@ -149,7 +150,7 @@ extension DatabaseManager {
             completion(false)
             return
           }
-          self?.finishCreationConversation(conversationID: conversationID, firstMessage: firstMessage, completion: completion)
+          self?.finishCreationConversation(name: name, conversationID: conversationID, firstMessage: firstMessage, completion: completion)
         }
       } else {
         //conversation array doestn't exists. Create it!
@@ -159,7 +160,7 @@ extension DatabaseManager {
             completion(false)
             return
           }
-          self?.finishCreationConversation(conversationID: conversationID, firstMessage: firstMessage, completion: completion)
+          self?.finishCreationConversation(name: name, conversationID: conversationID, firstMessage: firstMessage, completion: completion)
         }
       }
     }
@@ -180,7 +181,7 @@ extension DatabaseManager {
 
   }
 
-  private func finishCreationConversation(conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+  private func finishCreationConversation(name: String, conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
     var message = ""
 
     switch firstMessage.kind {
@@ -222,7 +223,8 @@ extension DatabaseManager {
       "content": message,
       "date": dateString,
       "sender_email": currentUserEmail,
-      "is_read": false
+      "is_read": false,
+      "name": name
     ]
 
     let value: [String: Any] = ["messages": [collectionMessage]]
