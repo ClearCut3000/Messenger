@@ -99,6 +99,21 @@ class ChatViewController: MessagesViewController {
   }
 
   //MARK: - Methods
+  private func setupInputButton() {
+    let button = InputBarButtonItem()
+    button.setSize(CGSize(width: 35, height: 35), animated: false)
+    button.setImage(UIImage(systemName: "add"), for: .normal)
+    button.onTouchUpInside { [weak self] _ in
+      self?.presentInputActionSheet()
+    }
+    messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false, animations: nil)
+    messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+  }
+
+  private func presentInputActionSheet() {
+
+  }
+
   private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
     DatabaseManager.shared.getAllMessagesForConversation(with: id) { [weak self] result in
       switch result {
@@ -144,7 +159,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     } else {
       guard let conversationId = conversationId, let name = self.title else { return }
       //Appent to existing conversation
-      DatabaseManager.shared.sendMessage(to: conversationId, name: name, newMessage: message) { success in
+      DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, newMessage: message) { success in
         if success {
           print("Message send!")
         } else {
