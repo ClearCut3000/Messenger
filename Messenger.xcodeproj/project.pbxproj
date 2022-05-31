@@ -491,6 +491,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Messenger/Supported Files/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a picture";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to microphone to take a video";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Plaese allow access to select photo from library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -525,6 +526,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Messenger/Supported Files/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a picture";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to microphone to take a video";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Plaese allow access to select photo from library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
