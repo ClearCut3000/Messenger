@@ -25,6 +25,7 @@
 		367A0748281CA87300A092FE /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A0747281CA87300A092FE /* UIView + Extension.swift */; };
 		367A074C2820605000A092FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367A074B2820605000A092FE /* GoogleService-Info.plist */; };
 		367A074E282309B800A092FE /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A074D282309B800A092FE /* DatabaseManager.swift */; };
+		369655802847F3DC00995680 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696557F2847F3DC00995680 /* NewConversationCell.swift */; };
 		369A33CB283AB485002A4FE4 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369A33CA283AB485002A4FE4 /* ConversationTableViewCell.swift */; };
 		5E40511F9E08E9BC7DBFD8A0 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0687A6389CC69C6B684BC4FD /* Pods_Messenger.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		367A0747281CA87300A092FE /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		367A074B2820605000A092FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		367A074D282309B800A092FE /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		3696557F2847F3DC00995680 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		369A33CA283AB485002A4FE4 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		36C5D7702827E200004F0167 /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		B89DBA03EB4B1715B0ACABB5 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				367A0739281B1C7C00A092FE /* Storyboards */,
 				369A33CA283AB485002A4FE4 /* ConversationTableViewCell.swift */,
+				3696557F2847F3DC00995680 /* NewConversationCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				367A0725281B156C00A092FE /* ConversationsViewController.swift in Sources */,
 				367A0741281B24D200A092FE /* VideoPlayerViewController.swift in Sources */,
 				367A0748281CA87300A092FE /* UIView + Extension.swift in Sources */,
+				369655802847F3DC00995680 /* NewConversationCell.swift in Sources */,
 				367A0721281B156C00A092FE /* AppDelegate.swift in Sources */,
 				3621166D282B1902001BA8C8 /* ChatViewController.swift in Sources */,
 				367A0745281B251200A092FE /* ProfileViewController.swift in Sources */,
