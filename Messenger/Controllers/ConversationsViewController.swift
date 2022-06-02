@@ -27,6 +27,8 @@ class ConversationsViewController: UIViewController {
   //MARK: - Properties
   private var conversations = [Conversation]()
 
+  private var loginObserver: NSObjectProtocol?
+
   //MARK: - Subview's
   private let spinner = JGProgressHUD(style: .dark)
 
@@ -58,6 +60,13 @@ class ConversationsViewController: UIViewController {
     setupTableView()
     fetchConversations()
     startListeningForConversations()
+
+    loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
+                                                           object: nil,
+                                                           queue: .main) { [weak self] _ in
+      guard let strongSelf = self else { return }
+      strongSelf.startListeningForConversations()
+    }
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +83,11 @@ class ConversationsViewController: UIViewController {
   //MARK: - Methods
   private func startListeningForConversations() {
     guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
+
+    if let observer = loginObserver {
+      NotificationCenter.default.removeObserver(observer)
+    }
+
     print("Starting conversation fetch...")
     let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
     DatabaseManager.shared.getAllConversations(for: safeEmail) { [weak self] result in
