@@ -40,9 +40,9 @@ extension DatabaseManager {
 //MARK: - Account Management
 extension DatabaseManager {
   public func userExists(with email: String, completion: @escaping ((Bool) -> Void)) {
-    var safeEmail = email.replacingOccurrences(of: ".", with: "-").replacingOccurrences(of: "@", with: "-")
+    let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
     database.child(safeEmail).observeSingleEvent(of: .value) { snapshot in
-      guard snapshot.value as? String != nil else {
+      guard snapshot.value as? [String: Any] != nil else {
         completion(false)
         return
       }
@@ -171,7 +171,7 @@ extension DatabaseManager {
         if var conversations = snapshot.value as? [[String: Any]] {
           //append
           conversations.append(recipient_newConversationData)
-          self?.database.child("\(otherUserEmail)/conversations").setValue(conversationID)
+          self?.database.child("\(otherUserEmail)/conversations").setValue(conversations)
         } else {
           //create
           self?.database.child("\(otherUserEmail)/conversations").setValue([recipient_newConversationData])
@@ -509,6 +509,16 @@ extension DatabaseManager {
         }
       }
     }
+  }
+
+  /// Checks is current user already has a conversation with this otherUser
+  public func conversationExists(with targetRecipientEmail: String, completion: @escaping (Result<String, Error>) -> Void) {
+    let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)
+    guard let senderEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+      return
+    }
+    let sefeSenderEmail = DatabaseManager.safeEmail(emailAddress: senderEmail)
+    
   }
 }
 
