@@ -421,7 +421,6 @@ extension DatabaseManager {
     }
   }
 
-
   private func finishCreationConversation(name: String, conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
     var message = ""
 
@@ -479,6 +478,38 @@ extension DatabaseManager {
     }
   }
 
+  ///Deleting conversations with ID
+  public func deleteConversation(conversationID: String, completion: @escaping (Bool) -> Void) {
+    guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
+    let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+    // Get all conversations for current user
+    // delete conversation in collection with target ID
+    // reset conversations for user in DataBase
+    let ref = database.child("\(safeEmail)/conversations")
+    ref.observeSingleEvent(of: .value) { snapshot in
+      if var conversations = snapshot.value as? [[String: Any]] {
+        var positionToRemove =  0
+        for conversation in conversations {
+          if let ID = conversation["id"] as? String,
+             ID == conversationID {
+            print("Found conversation to delete!")
+            break
+          }
+          positionToRemove += 1
+        }
+        conversations.remove(at: positionToRemove)
+        ref.setValue(conversations) { error, _ in
+          guard error == nil else {
+            completion(false)
+            print("Failed to delete conversatin - \(String(describing: error))")
+            return
+          }
+          print("Deleted conversation")
+          completion(true)
+        }
+      }
+    }
+  }
 }
 
 struct ChatAppUser {
