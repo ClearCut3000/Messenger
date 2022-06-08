@@ -46,7 +46,7 @@ class RegisterViewController: UIViewController {
                                           width: 5,
                                           height: 0))
     field.leftViewMode = .always
-    field.backgroundColor = .white
+    field.backgroundColor = .secondarySystemBackground
     return field
   }()
 
@@ -64,7 +64,7 @@ class RegisterViewController: UIViewController {
                                           width: 5,
                                           height: 0))
     field.leftViewMode = .always
-    field.backgroundColor = .white
+    field.backgroundColor = .secondarySystemBackground
     return field
   }()
 
@@ -82,7 +82,7 @@ class RegisterViewController: UIViewController {
                                           width: 5,
                                           height: 0))
     field.leftViewMode = .always
-    field.backgroundColor = .white
+    field.backgroundColor = .secondarySystemBackground
     return field
   }()
 
@@ -100,7 +100,7 @@ class RegisterViewController: UIViewController {
                                           width: 5,
                                           height: 0))
     field.leftViewMode = .always
-    field.backgroundColor = .white
+    field.backgroundColor = .secondarySystemBackground
     field.isSecureTextEntry = true
     return field
   }()
@@ -122,7 +122,7 @@ class RegisterViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Log In"
-    view.backgroundColor = .cyan
+    view.backgroundColor = .systemBackground
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
                                                         style: .done,
                                                         target: self,
