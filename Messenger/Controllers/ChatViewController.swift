@@ -77,8 +77,10 @@ class ChatViewController: MessagesViewController {
   }()
   public var isNewConversation = false
   public let otherUserEmail: String
-  private let conversationId: String?
 
+  private var senderPhotoURL: URL?
+  private var otherUserPhotoURL: URL?
+  private let conversationId: String?
   private var messages = [Message]()
   private var selfSender: Sender? {
     guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return nil }
@@ -400,6 +402,61 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
       imageView.sd_setImage(with: imageURL, completed: nil)
     default:
       break
+    }
+  }
+
+  func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+    let sender = message.sender
+    if sender.senderId == selfSender?.senderId {
+      return .link
+    }
+    return .secondarySystemBackground
+  }
+
+  func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    let sender = message.sender
+    if sender.senderId == selfSender?.senderId {
+      //Show our profile image
+      if let currentUserImageURL = self.senderPhotoURL {
+        avatarView.sd_setImage(with: currentUserImageURL, completed: nil)
+      } else {
+        //Fetch self photo URL
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let path = "images/\(safeEmail)_profile_picture.png"
+        StorageManager.shared.downloadURL(for: path) { [weak self] result in
+          switch result {
+          case .success(let url):
+            self?.senderPhotoURL = url
+            DispatchQueue.main.async {
+              avatarView.sd_setImage(with: url, completed: nil)
+            }
+          case .failure(let error):
+            print("Error occured while fetching self photo URL for message bubbles - \(error)")
+          }
+        }
+      }
+    } else {
+      //Show other user profile photo image
+      if let otherUserPhotoURL = self.otherUserPhotoURL {
+        avatarView.sd_setImage(with: otherUserPhotoURL, completed: nil)
+      } else {
+        //Fetch other user photo URL
+        let email = otherUserEmail
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let path = "images/\(safeEmail)_profile_picture.png"
+        StorageManager.shared.downloadURL(for: path) { [weak self] result in
+          switch result {
+          case .success(let url):
+            self?.otherUserPhotoURL = url
+            DispatchQueue.main.async {
+              avatarView.sd_setImage(with: url, completed: nil)
+            }
+          case .failure(let error):
+            print("Error occured while fetching other user photo URL for message bubbles - \(error)")
+          }
+        }
+      }
     }
   }
 }
