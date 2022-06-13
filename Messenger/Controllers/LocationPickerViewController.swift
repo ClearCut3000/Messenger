@@ -13,8 +13,8 @@ class LocationPickerViewController: UIViewController {
 
   //MARK: - Properties
   public var completion: ((CLLocationCoordinate2D) -> Void)?
-  private var coordinates: CLLocationCoordinate2D?
   private var isPickable = true
+  private var coordinates: CLLocationCoordinate2D?
 
   //MARK: - Subview's
   private let map: MKMapView = {
@@ -25,7 +25,7 @@ class LocationPickerViewController: UIViewController {
   //MARK: - Init's
   init(coordinates: CLLocationCoordinate2D?) {
     self.coordinates = coordinates
-    self.isPickable = false
+    self.isPickable = coordinates == nil
     super.init(nibName: nil, bundle: nil)
   }
 
