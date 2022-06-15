@@ -10,7 +10,7 @@ import FirebaseAuth
 import JGProgressHUD
 import FirebaseStorage
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
   
   //MARK: - Subview's
   private let spinner = JGProgressHUD(style: .dark)

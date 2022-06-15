@@ -10,14 +10,24 @@ import FirebaseDatabase
 import MessageKit
 import CoreLocation
 
+/// Manager Object to read and write data to real time firebase database
 final class DatabaseManager {
 
   //MARK: - Properties
-  static let shared = DatabaseManager()
-  private let database = Database.database().reference()
+  /// Shared instance of class
+  public static let shared = DatabaseManager()
   public enum DatabaseError: Error {
     case failedToFetch
+    public var localisedDescription: String {
+      switch self {
+      case .failedToFetch:
+        return "Thise means failure code"
+      }
+    }
   }
+  private let database = Database.database().reference()
+
+  private init() {}
 
   //MARK: - Methods
   static func safeEmail(emailAddress: String) -> String {
@@ -25,8 +35,9 @@ final class DatabaseManager {
   }
 }
 
-//MARK: -
+//MARK: - Data Loader for Path
 extension DatabaseManager {
+  /// Returns dictionary node at child path
   public func getDataFor(path: String, completion: @escaping (Result<Any, Error>) -> Void) {
     database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
       guard let value = snapshot.value else {
@@ -40,6 +51,7 @@ extension DatabaseManager {
 
 //MARK: - Account Management
 extension DatabaseManager {
+  /// Checks if user exists for given email
   public func userExists(with email: String, completion: @escaping ((Bool) -> Void)) {
     let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
     database.child(safeEmail).observeSingleEvent(of: .value) { snapshot in
@@ -90,6 +102,7 @@ extension DatabaseManager {
     }
   }
 
+  /// Gets all user from database
   public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
     database.child("users").observeSingleEvent(of: .value) { snapshot in
       guard let value = snapshot.value as? [[String: String]] else {
@@ -473,6 +486,7 @@ extension DatabaseManager {
     }
   }
 
+  /// Creates conversation struct for existing users and add it into firebase
   private func finishCreationConversation(name: String, conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
     var message = ""
 

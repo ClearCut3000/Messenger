@@ -8,7 +8,7 @@
 import UIKit
 import JGProgressHUD
 
-class NewConversationViewController: UIViewController {
+final class NewConversationViewController: UIViewController {
 
   //MARK: - Properties
   private var users = [[String: String]]()
@@ -161,9 +161,4 @@ extension NewConversationViewController: UISearchBarDelegate {
       tableView.reloadData()
     }
   }
-}
-
-struct SearchResult {
-  let name: String
-  let email: String
 }

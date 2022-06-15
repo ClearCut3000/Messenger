@@ -8,5 +8,6 @@
 import Foundation
 
 extension Notification.Name {
+  /// Notification when user logs In
   static let didLogInNotification = Notification.Name("didLogInNotification")
 }
