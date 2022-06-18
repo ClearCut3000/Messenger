@@ -105,8 +105,6 @@ final class RegisterViewController: UIViewController {
     return field
   }()
 
-  
-
   private let registerButton: UIButton = {
     let button = UIButton()
     button.setTitle("Register", for: .normal)
@@ -142,7 +140,7 @@ final class RegisterViewController: UIViewController {
     scrollView.addSubview(registerButton)
     imageView.isUserInteractionEnabled = true
     scrollView.isUserInteractionEnabled = true
-    let gesture = UIGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
     imageView.addGestureRecognizer(gesture)
   }
 

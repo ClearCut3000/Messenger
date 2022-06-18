@@ -11,8 +11,6 @@ import FBSDKLoginKit
 import GoogleSignIn
 import SDWebImage
 
-
-
 final class ProfileViewController: UIViewController {
   //MARK: - Properties
   var data = [ProfileViewModel]()
@@ -35,7 +33,7 @@ final class ProfileViewController: UIViewController {
         //LogOut Facebook
         FBSDKLoginKit.LoginManager().logOut()
         //LogOut Google
-        GIDSignIn.sharedInstance().signOut()
+        GIDSignIn.sharedInstance.signOut()
 
         do {
           try FirebaseAuth.Auth.auth().signOut()

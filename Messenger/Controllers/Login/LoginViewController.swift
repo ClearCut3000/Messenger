@@ -86,7 +86,7 @@ final class LoginViewController: UIViewController {
     return button
   }()
 
-  private let googleLoginButton = GIDSignInButton()
+  private let googleLogInButton = GIDSignInButton()
 
   //MARK: - View Lifecycle
   override func viewDidLoad() {
@@ -97,7 +97,6 @@ final class LoginViewController: UIViewController {
       guard let strongSelf = self else { return }
       strongSelf.navigationController?.dismiss(animated: true, completion: nil)
     }
-    GIDSignIn.sharedInstance().presentingViewController = self
 
     title = "Log In"
     view.backgroundColor = .systemBackground
@@ -119,7 +118,8 @@ final class LoginViewController: UIViewController {
     scrollView.addSubview(passwordField)
     scrollView.addSubview(loginButton)
     scrollView.addSubview(fbLoginButton)
-    scrollView.addSubview(googleLoginButton)
+    scrollView.addSubview(googleLogInButton)
+    googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
   }
 
   deinit {
@@ -153,13 +153,22 @@ final class LoginViewController: UIViewController {
                                           y: loginButton.bottom+10,
                                           width: scrollView.width-60,
                                           height: 52)
-    googleLoginButton.frame      = CGRect(x: 30,
+    googleLogInButton.frame      = CGRect(x: 30,
                                           y: fbLoginButton.bottom+10,
                                           width: scrollView.width-60,
                                           height: 52)
   }
 
   //MARK: - Actions
+  @objc private func googleSignInButtonTapped() {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+          let signInConfig = appDelegate.signInConfig else { return }
+    GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+      guard let user = user, error == nil else { return }
+      appDelegate.handleSessionRestore(user: user)
+    }
+  }
+
   @objc private func loginButtonTapped() {
 
     emailField.resignFirstResponder()

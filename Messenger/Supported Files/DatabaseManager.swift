@@ -16,6 +16,7 @@ final class DatabaseManager {
   //MARK: - Properties
   /// Shared instance of class
   public static let shared = DatabaseManager()
+
   public enum DatabaseError: Error {
     case failedToFetch
     public var localisedDescription: String {
@@ -198,23 +199,23 @@ extension DatabaseManager {
         //conversation array exist for current user
         //you should append
         conversations.append(newConversationData)
-        userNode["onversations"] = conversations
+        userNode["conversations"] = conversations
         ref.setValue(userNode) {[weak self] error, _ in
           guard error == nil else {
             completion(false)
             return
           }
-          self?.finishCreationConversation(name: name, conversationID: conversationID, firstMessage: firstMessage, completion: completion)
+          self?.finishCreatingConversation(name: name, conversationID: conversationID, firstMessage: firstMessage, completion: completion)
         }
       } else {
         //conversation array doestn't exists. Create it!
-        userNode["onversations"] = [newConversationData]
+        userNode["conversations"] = [newConversationData]
         ref.setValue(userNode) {[weak self] error, _ in
           guard error == nil else {
             completion(false)
             return
           }
-          self?.finishCreationConversation(name: name, conversationID: conversationID, firstMessage: firstMessage, completion: completion)
+          self?.finishCreatingConversation(name: name, conversationID: conversationID, firstMessage: firstMessage, completion: completion)
         }
       }
     }
@@ -487,7 +488,7 @@ extension DatabaseManager {
   }
 
   /// Creates conversation struct for existing users and add it into firebase
-  private func finishCreationConversation(name: String, conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+  private func finishCreatingConversation(name: String, conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
     var message = ""
 
     switch firstMessage.kind {
@@ -608,16 +609,3 @@ extension DatabaseManager {
     }
   }
 }
-
-struct ChatAppUser {
-  let firstName: String
-  let lastName: String
-  let emailAddress: String
-  var safeEmail: String {
-    return emailAddress.replacingOccurrences(of: "@", with: "-").replacingOccurrences(of: ".", with: "-")
-  }
-  var profilePictureFileName: String {
-    return "\(safeEmail)_profile_picture.png"
-  }
-}
-
